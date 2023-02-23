@@ -1,0 +1,63 @@
+{
+  "name": "phvd",
+  "version": "0.0.1",
+  "description": "A funny video downloader",
+  "main": "./app/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "build": "electron-packager . app --platform win32 --arch x64 --out dist/",
+    "setup": "electron-installer-windows --src ./out/phvd-win32-x64/ --dest ./installer/ --config ./install.json",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "author": "Krischan",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.5",
+    "@electron-forge/maker-deb": "^6.0.5",
+    "@electron-forge/maker-rpm": "^6.0.5",
+    "@electron-forge/maker-squirrel": "^6.0.5",
+    "@electron-forge/maker-zip": "^6.0.5",
+    "electron-forge": "^5.2.4",
+    "electron-installer-windows": "^3.0.0",
+    "electron-prebuilt-compile": "1.4.13"
+  },
+  "dependencies": {
+    "custom-electron-titlebar": "^4.1.6",
+    "electron": "^23.1.0",
+    "electron-compile": "^6.4.4",
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm"
+      },
+      "electronWinstallerConfig": {
+        "name": "phvd"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "phvd"
+      }
+    }
+  }
+}

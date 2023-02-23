@@ -1,0 +1,360 @@
+<!DOCTYPE html><html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+    </head>
+    <body>
+      <nav>
+        <div id="titleshown"></div>
+        <div id="buttons">
+            <div id="quit"><span>&times;</span></div>
+        </div>
+      </nav>
+      <img src="./ph.png" class="v611_69" alt="">
+      <div class="v611_2">
+        <div class="vd1">
+          <div class="v611_4"><img src="./arrowright.svg" id="go" class="v611_12" alt=""></div>
+        <input id="linkq" class="v611_3">
+        </div>
+        
+        <div class="v611_16">
+          <div class="v611_7"><span id="cmdd"></span></div>
+          <img class="v611_8" id="v16q" src="./image.svg"  alt="">
+            </div>
+              </div>
+              <script src="./index.js"></script>
+              <script>
+                const { remote, electron } = require("electron");
+                const child_process = require('child_process');
+                const wind = remote.BrowserWindow.getFocusedWindow();
+document.getElementById("quit").addEventListener("click", () => {
+  wind.close();
+});
+function run_script(command, args, callback) {
+  var child = child_process.spawn(command, args, {
+      encoding: 'utf8',
+      shell: true
+  });
+  // You can also use a variable to save the output for when the script closes later
+  child.on('error', (error) => {
+
+  });
+
+  child.stdout.setEncoding('utf8');
+  child.stdout.on('data', (data) => {
+      //Here is the output
+      data=data.toString();   
+      console.log(data); 
+      document.getElementById("cmdd").innerHTML = data + "<br/>" + document.getElementById("cmdd").innerHTML; 
+  });
+
+  child.stderr.setEncoding('utf8');
+  child.stderr.on('data', (data) => {
+      // Return some data to the renderer process with the mainprocess-response ID
+      //Here is the output from the command
+      //console.log(data);  
+      document.getElementById("cmdd").innerHTML = document.getElementById("cmdd").innerHTML + "<br />" + "<br />" + data;
+  });
+
+  child.on('close', (code) => {
+      //Here you can get the exit code of the script  
+      switch (code) {
+          case 0:
+              break;
+      }
+
+  });
+  if (typeof callback === 'function')
+      callback();
+}
+document.getElementById("go").addEventListener("click", () => {
+  if( document.getElementById("linkq").value.slice(11).indexOf("pornhub") == 0 ) {
+    document.getElementById("v16q").style = "display: none;";
+    document.getElementById("cmdd").innerHTML = "Download starting..."
+    run_script('yt-dlp.exe -P "%USERPROFILE%/Downloads" -o "%(title)s.%(ext)s" -S "ext" ' + document.getElementById("linkq").value +' --no-mtime ' , [""], null);
+} else {
+    alert("No no no!");
+}
+});
+            </script>
+              </body>
+              </html>
+               <br/>
+               <br/> 
+               <style>* {
+  box-sizing: border-box;
+}
+:not(input):not(textarea):not(span),
+:not(input):not(textarea):not(span)::after,
+:not(input):not(textarea):not(span)::before {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+input, button, textarea, :focus {
+    outline: none;
+}
+a:not([draggable=true]), img:not([draggable=true]) {
+    -webkit-user-drag: none;
+}
+a[href^="http://"],
+a[href^="https://"],
+a[href^="ftp://"] {
+    -webkit-user-drag: auto;
+}
+body {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+nav {
+  display: block;
+  width: 100%;
+  height: 30px;
+  background-color: rgba(51, 51, 51, 0);
+  -webkit-app-region: drag;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+nav #titleshown {
+  width: 30%;
+  height: 100%;
+  line-height: 30px;
+  color: #f7f7f7;
+  float: left;
+  padding: 0 0 0 1em;
+}
+
+nav #buttons {
+  float: right;
+  width: 78px;
+  height: 40px;
+  line-height: 30px;
+  background: rgb(19,19,19);
+background: linear-gradient(62deg, rgba(19,19,19,1) 0%, rgba(41,41,41,1) 44%, rgba(19,19,19,1) 92%); 
+  -webkit-app-region: no-drag;
+  border-radius: 0 0 0 10px;
+  transition: 0.5s;
+}
+
+nav #buttons #quit {
+  float: left;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: #f7f7f7;
+  cursor: default;
+  padding-top: 5px;
+  transition: 0.5s;
+  font-size: 19px;
+  border-radius: 0 0 0 10px;
+}
+#buttons #quit:hover {
+  background-color: #ff7b00dd;
+  border-radius: 0 0 0 10px;
+}
+#cmdd {
+  color: #f7f7f7;
+  opacity: 1;
+  position: absolute;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  overflow: hidden;
+  z-index: 999;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  word-wrap: break-word;
+  width: 711px;
+  height: 298px;
+  top: 0px;
+  left: 0px;
+  border-top-left-radius: 58px;
+  border-top-right-radius: 58px;
+  border-bottom-left-radius: 58px;
+  border-bottom-right-radius: 58px;
+  display: block;
+}
+.v611_2 {
+  width: 800px;
+  height: 600px;
+  background: rgba(0,0,0,1);
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+.v611_18 {
+  width: 525px;
+  height: 141px;
+  background: linear-gradient(rgba(174,104,0,1), rgba(254,153,0,0));
+  opacity: 1;
+  position: absolute;
+  top: 93px;
+  left: 137px;
+  border-top-left-radius: 29px;
+  border-top-right-radius: 29px;
+  border-bottom-left-radius: 29px;
+  border-bottom-right-radius: 29px;
+  overflow: hidden;
+  padding-top: 10px;
+  transition: 0.5s;
+}
+.v611_18 span {
+  z-index: 12;
+}
+.v611_69 {
+  z-index: 10;
+position: absolute;
+width: 142px;
+left: 330px;
+top: 10px;
+}
+.v611_4 {
+  width: 55px;
+  height: 55px;
+  background: #ff9900;
+  opacity: 1;
+  position: absolute;
+  top: 450px;
+  left: 690px;
+  border-radius: 19px;
+  overflow: hidden;
+}
+.v611_3 {
+  width: 630px;
+  height: 55px;
+  background: rgb(254,153,0);
+background: linear-gradient(287deg, rgba(254,153,0,1) 0%, rgba(125,76,2,1) 44%, rgba(254,153,0,1) 92%); 
+  color: #fff;
+  opacity: 1;
+  position: absolute;
+  top: 450px;
+  left: 44px;
+  padding-left: 15px;
+  border-radius: 19px;
+  overflow: hidden;
+  border: 0;
+}
+.v611_16 {
+  width: 711px;
+  height: 298px;
+  background: url("../images/v611_16.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 106px;
+  left: 44px;
+  box-shadow: 0px -7px 15px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  transition: 0.5s;
+  z-index: 10;
+}
+
+.v611_7 {
+  width: 711px;
+  height: 298px;
+  background: linear-gradient(rgba(18,18,18,1), rgba(28,28,28,1));
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border-top-left-radius: 58px;
+  border-top-right-radius: 58px;
+  border-bottom-left-radius: 58px;
+  border-bottom-right-radius: 58px;
+  overflow: hidden;
+}
+.v611_8 {
+  width: 81px;
+  height: 80px;
+  background: rgba(255,255,255,0);
+  opacity: 1;
+  position: absolute;
+  top: 109px;
+  left: 318px;
+  overflow: hidden;
+}
+.v611_9 {
+  width: 67px;
+  height: 66px;
+  background: url("../images/v611_9.png");
+  opacity: 1;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  border: 1.5px solid rgba(91,91,91,1);
+}
+.v611_10 {
+  width: 128px;
+  height: 2px;
+  background: rgba(91,91,91,1);
+  opacity: 1;
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  overflow: hidden;
+}
+.v611_11 {
+  width: 128px;
+  height: 2px;
+  background: rgba(91,91,91,1);
+  opacity: 1;
+  position: absolute;
+  top: 3px;
+  left: 88px;
+  overflow: hidden;
+}
+.v611_12 {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0);
+  opacity: 1;
+  position: absolute;
+  top: 8px;
+  left: 7px;
+  overflow: hidden;
+  z-index: 14;
+}
+.v611_13 {
+  width: 26px;
+  height: 19px;
+  background: url("../images/v611_13.png");
+  opacity: 1;
+  position: absolute;
+  top: 9px;
+  left: 6px;
+  border: 4px solid rgba(255,255,255,1);
+}
+.v611_17 {
+  width: 83px;
+  color: rgba(255,255,255,0.6700000166893005);
+  position: absolute;
+  top: 480px;
+  left: 60px;
+  font-family: Inter;
+  font-weight: Regular;
+  font-size: 16px;
+  opacity: 1;
+  text-align: left;
+}
+.v611_19 {
+  width: 58px;
+  color: rgba(255,255,255,1);
+  margin-left: 25px;
+  margin-top: 15px;
+  font-family: Inter;
+  font-weight: Regular;
+  font-size: 28px;
+  opacity: 1;
+  text-align: left;
+}
+</style>
